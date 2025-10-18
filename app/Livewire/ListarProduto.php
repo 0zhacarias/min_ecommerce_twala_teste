@@ -19,7 +19,7 @@ class ListarProduto extends Component
     public $precoMax = "";
     public $totalItems = 0;
 
-    protected $listeners = ['contar-carrinho' => 'updateContagem',  'produto_adicionado' => 'adicionarProduto' ];
+    protected $listeners = ['contar-carrinho' => 'updateContagem', /*  'produto_adicionado' => 'adicionarProduto' */ 'produto_adicionado' => '$refresh' ];
 
     public function atualizar($propriadade)
     {
@@ -75,9 +75,6 @@ class ListarProduto extends Component
     }
     public function abrirDialogProduto(){
         $this->dispatch('abrir-dialog-produto');
-       // $this->produtos[]=$produto;
-
-        $isOpenDialogProduto=true;
     }
 
     public function abrirCarrinho()
@@ -85,6 +82,24 @@ class ListarProduto extends Component
        
         $this->dispatch('abrir-carrinho');
         //$this->emit('abrirCarrinho');
+    }
+    public function getProdutosProperty()
+    {
+       // dd($produto);
+        /* return Produto::latest()->get()->map(function ($produto) {
+            return [
+                'id' => $produto->id,
+                'nome' => $produto->nome,
+                'descricao' => $produto->descricao,
+                'quantidade' => $produto->quantidade,
+                'categoria_id' => $produto->categoria_id,
+                'imagem' => $produto->imagem,
+                'preco' => $produto->preco,
+            ];
+        }); */
+        // Lógica para adicionar o produto
+      //  $this->adicionarAoCarrinho($produto);
+      return Produto::with('categorias')->latest()->paginate(8);
     }
     public function render()
     {

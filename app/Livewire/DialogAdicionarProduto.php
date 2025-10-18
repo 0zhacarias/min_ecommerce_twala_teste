@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Categoria;
+use App\Models\Produto;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -63,14 +64,14 @@ class DialogAdicionarProduto extends Component
         $this->validate();
         try {
 
-            $produto = [
+            $produto =Produto::create( [
                 'nome' => $this->nome,
                 'descricao' => $this->descricao,
                 'quantidade' => $this->quantidade,
                 'categoria_id' => $this->categoria_id,
-                'imagem' => $this->imagem->store('produtos', 'public'),
+                'imagem' => $this->imagem->store('imagens/produtos', 'public'),
                 'preco' => $this->preco,
-            ];
+            ]);
            // dd($produto);
             // Lógica para adicionar o produto
             $this->dispatch('produto_adicionado', produto: $produto);
@@ -79,6 +80,11 @@ class DialogAdicionarProduto extends Component
         } catch (\Throwable $th) {
             session()->flash('error', 'Erro ao adicionar o produto: ' . $th->getMessage());
         }
+    }
+
+    public function actualizarProduto($propertyName)  {
+        $this->validateOnly($propertyName);
+        
     }
 
  /*    public function render()
