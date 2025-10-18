@@ -36,8 +36,8 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 });
-/* Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 Route::get('/produtos', ListarProduto::class)->name('produtos.index');
 });
- */
+ 
 require __DIR__.'/auth.php';

@@ -21,10 +21,10 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
+                <flux:navlist.group :heading="__('Menu')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                         wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    <flux:navlist.item icon="home" :href="route('produtos.index')"
+                    <flux:navlist.item icon="inbox" :href="route('produtos.index')"
                         :current="request()->routeIs('produtos.index')" wire:navigate>{{ __('Listar Produtos') }}
                     </flux:navlist.item>
                 </flux:navlist.group>
@@ -32,7 +32,7 @@
 
             <flux:spacer />
 
-            <flux:navlist variant="outline">
+{{--             <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit"
                     target="_blank">
                     {{ __('Repository') }}
@@ -43,7 +43,7 @@
                     {{ __('Documentation') }}
                 </flux:navlist.item>
             </flux:navlist>
-
+ --}}
             <!-- Desktop User Menu -->
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
                 <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
@@ -71,7 +71,7 @@
                     <flux:menu.separator />
 
                     <flux:menu.radio.group>
-                        <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>{{ __('Settings') }}
+                        <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>{{ __('Configurações') }}
                         </flux:menu.item>
                     </flux:menu.radio.group>
 
@@ -81,7 +81,7 @@
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full"
                             data-test="logout-button">
-                            {{ __('Log Out') }}
+                            {{ __('Sair') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>

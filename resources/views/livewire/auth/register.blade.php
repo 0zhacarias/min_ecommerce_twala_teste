@@ -35,28 +35,28 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white dark:bg-zinc-900 p-8 rounded-xl shadow-2xl border border-zinc-200 dark:border-zinc-700">
+        <x-auth-header :title="__('Criar uma conta')" :description="__('Digite seus dados abaixo para criar sua conta')" />
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+        <!-- Session Status -->
 
     <form method="POST" wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
         <flux:input
             wire:model="name"
-            :label="__('Name')"
+            :label="__('Nome')"
             type="text"
             required
             autofocus
             autocomplete="name"
-            :placeholder="__('Full name')"
+            :placeholder="__('Nome completo')"
         />
 
         <!-- Email Address -->
         <flux:input
             wire:model="email"
-            :label="__('Email address')"
+            :label="__('Endereço de email')"
             type="email"
             required
             autocomplete="email"
@@ -81,7 +81,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
             type="password"
             required
             autocomplete="new-password"
-            :placeholder="__('Confirm password')"
+            :placeholder="__('Confirmar password')"
             viewable
         />
 
@@ -93,7 +93,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     </form>
 
     <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-        <span>{{ __('Already have an account?') }}</span>
-        <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
+        <span>{{ __('Tens uma conta?') }}</span>
+        <flux:link :href="route('login')" wire:navigate>{{ __('Iniciar sessão') }}</flux:link>
     </div>
 </div>

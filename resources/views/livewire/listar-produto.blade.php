@@ -5,65 +5,64 @@
 
 
     <!-- Filtros -->
-    <div class="mb-8">
-        <div class="flex flex-wrap gap-8 items-end">
-            <!-- Pesquisa por nome -->
-            <div class="flex-1 min-w-64">
+    <div class="mb-8 border-b border-gray-100 pb-6 bg-gray-50 rounded-lg px-6 py-4 shadow-xl">
+        <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+            <!-- Search -->
+            <div class="flex-1 max-w-md">
                 <input type="text" wire:model.live="search" placeholder="Buscar produto..."
-                    class="w-full px-4 py-2 border-0 border-b-2 border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent">
+                    class="w-full px-0 py-3 border-0 border-b border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-sm placeholder-gray-900">
             </div>
 
-            <!-- Filtro por categoria -->
-            <div>
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-4 items-center">
                 <select wire:model.live="categoria_id"
-                    class="px-4 py-2 border-0 border-b-2 border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent">
-                    <option value="">Todas categorias</option>
+                    class="px-0 py-2 border-0 border-b border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-sm">
+                    <option value="">Categoria</option>
                     @foreach ($categorias as $categoria)
                         <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                     @endforeach
                 </select>
-            </div>
 
-            <!-- Filtros de preço -->
-            <div class="flex gap-2">
-                <input type="number" wire:model.live="precoMin" placeholder="Min"
-                    class="w-20 px-3 py-2 border-0 border-b-2 border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-sm">
-                <span class="py-2 text-gray-400">-</span>
-                <input type="number" wire:model.live="precoMax" placeholder="Max"
-                    class="w-20 px-3 py-2 border-0 border-b-2 border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-sm">
-            </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <input type="number" wire:model.live="precoMin" placeholder="Min"
+                        class="w-16 px-0 py-2 border-0 border-b border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-center">
+                    <span class="text-gray-300">—</span>
+                    <input type="number" wire:model.live="precoMax" placeholder="Max"
+                        class="w-16 px-0 py-2 border-0 border-b border-gray-200 focus:border-gray-900 focus:outline-none bg-transparent text-center">
+                </div>
 
-            <!-- Botão limpar -->
-            <button wire:click="abrirDialogProduto"
-                class="px-4 py-2 text-md text-gray-600 hover:text-white hover:bg-gray-900 border border-red-200 rounded-md transition-all duration-200 flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Produto
-            </button>
-            <!-- Botão limpar -->
-            <button wire:click="limpar"
-                class="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-red-200 rounded-md transition-all duration-200 flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                Limpar Filtros
-            </button>
-            <!-- Carrinho -->
-            <div class="relative" wire:click="abrirCarrinho()">
+                <!-- Actions -->
+                   <button wire:click="limpar"
+                        class="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                <div class="flex items-center gap-3 ml-4">
+                    <button wire:click="abrirDialogProduto"
+                        class="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
 
-                <button class="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H17M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20.5 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    </svg>
-                </button>
-                <!-- Badge do carrinho -->
-                <span
-                    class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {{ $totalItems }}
-                </span>
+                 
+
+                    <div class="relative" wire:click="abrirCarrinho()">
+                        <button class="p-2 text-gray-400 hover:text-gray-900 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H17M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20.5 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                            </svg>
+                        </button>
+                        @if($totalItems > 0)
+                            <span class="absolute -top-1 -right-1 bg-gray-900 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                                {{ $totalItems }}
+                            </span>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>

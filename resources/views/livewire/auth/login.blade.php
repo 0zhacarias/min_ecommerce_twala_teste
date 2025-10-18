@@ -49,7 +49,8 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        //$this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: route('produtos.index', absolute: false), navigate: true);
     }
 
     /**
@@ -100,57 +101,105 @@ new #[Layout('components.layouts.auth')] class extends Component {
     }
 }; ?>
 
-<div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
+<div class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+            <!-- Header with improved spacing and typography -->
+            <div class="text-center space-y-2">
+                <h1 class="text-3xl font-bold text-gray-900">{{ __('Bem-vindo de volta') }}</h1>
+                <p class="text-gray-600">{{ __('Entre na sua conta') }}</p>
+            </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+            <!-- Session Status with better styling -->
+            <x-auth-session-status class="text-center bg-green-50 text-green-700 p-3 rounded-lg" :status="session('status')" />
 
-    <form method="POST" wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+            <form wire:submit="login" class="space-y-5">
+                <!-- Email with floating label effect -->
+                <div class="space-y-2">
+                    <flux:input
+                        wire:model="email"
+                        :label="__('Endereço de email')"
+                        type="email"
+                        required
+                        autofocus
+                        autocomplete="email"
+                        placeholder="seu@email.com"
+                        class="w-full px-4 py-3  rounded-lg focus:border-gray-500 focus:ring-gray-500 transition-all duration-200"
+                    />
+                </div>
 
-        <!-- Password -->
-        <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-                viewable
-            />
+                <!-- Password with improved UX -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <flux:input
+                            wire:model="password"
+                            :label="__('Senha')"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                            :placeholder="__('Digite sua senha')"
+                            viewable
+                            class="w-full px-4 py-3 focus:border-gray-500 focus:ring-gray-500 transition-all duration-200"
+                        />
+                    </div>
+                    
+                    @if (Route::has('password.request'))
+                        <div class="text-right">
+                            <flux:link 
+                                :href="route('password.request')" 
+                                wire:navigate
+                                class="text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                            >
+                                {{ __('Esqueceu a senha?') }}
+                            </flux:link>
+                        </div>
+                    @endif
+                </div>
 
-            @if (Route::has('password.request'))
-                <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
-                    {{ __('Forgot your password?') }}
-                </flux:link>
+                <!-- Remember Me with better styling -->
+                <div class="flex items-center justify-between py-2">
+                    <flux:checkbox 
+                        wire:model="remember" 
+                        :label="__('Lembrar de mim')"
+                        class="text-gray-600"
+                    />
+                </div>
+
+                <!-- Login button with loading state -->
+                <flux:button 
+                    variant="primary" 
+                    type="submit" 
+                    class="w-full bg-gradient-to-r from-gray-600 to-gray-600 hover:from-gray-700 hover:to-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] focus:ring-4 focus:ring-gray-200"
+                    data-test="login-button"
+                    wire:loading.attr="disabled"
+                    wire:loading.class="opacity-75 cursor-not-allowed"
+                >
+                    <span wire:loading.remove>{{ __('Entrar') }}</span>
+                    <span wire:loading class="flex items-center justify-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {{ __('Signing in...') }}
+                    </span>
+                </flux:button>
+            </form>
+
+            <!-- Sign up link with improved design -->
+            @if (Route::has('register'))
+                <div class="text-center pt-4 border-t border-gray-200">
+                    <p class="text-gray-600">
+                        {{ __('Novo na nossa plataforma?') }}
+                        <flux:link 
+                            :href="route('register')" 
+                            wire:navigate
+                            class="font-semibold text-gray-600 hover:text-gray-800 transition-colors duration-200 ml-1"
+                        >
+                            {{ __('Cria uma conta') }}
+                        </flux:link>
+                    </p>
+                </div>
             @endif
         </div>
-
-        <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
-
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full" data-test="login-button">
-                {{ __('Log in') }}
-            </flux:button>
-        </div>
-    </form>
-
-    @if (Route::has('register'))
-        <div class="space-x-1 text-sm text-center rtl:space-x-reverse text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Don\'t have an account?') }}</span>
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
-        </div>
-    @endif
+    </div>
 </div>
