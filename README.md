@@ -28,7 +28,7 @@
 
 #### 1. Clonar o Repositório
 ```bash
-git clone https://github.com/@zhacarias/min_ecommerce_twala_teste.git
+git clone https://github.com/0zhacarias/min_ecommerce_twala_teste.git
 cd min_ecommerce_twala_teste
 ```
 #### 2. Instalar Dependências 
