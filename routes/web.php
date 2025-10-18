@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\ListarProduto;
 use App\Livewire\Produto;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
@@ -31,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+});
+Route::middleware(['auth'])->group(function () {
+Route::get('/produtos', ListarProduto::class)->name('produtos.index');
 });
 
 require __DIR__.'/auth.php';

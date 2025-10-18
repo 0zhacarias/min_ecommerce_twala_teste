@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -32,22 +33,28 @@ class ListarProduto extends Component
     }
     public function render()
     {
-        $produtos=Produto::query();
-        if($this->search){
-            $produtos->where('nome','like','%'.$this->search.'%');
+        $produtos = Produto::query();
+        if ($this->search) {
+            $produtos->where('nome', 'like', '%' . $this->search . '%');
         }
-        if($this->categoria){
-            $produtos->where('categoria_id','like','%'.$this->categoria_id.'%');
+        if ($this->categoria_id) {
+          //   dd($produtos->get(),$this->categoria_id);
+            $produtos->where('categoria_id', 'like', '%' . $this->categoria_id . '%');
         }
-        if($this->precoMin){
-            $produtos->where('preco','like','%'.$this->precoMin.'%');
+        if ($this->precoMin) {
+            $produtos->where('preco', 'like', '%' . $this->precoMin . '%');
         }
-        if($this->precoMax){
-            $produtos->where('preco','like','%'.$this->precoMax.'%');
+        if ($this->precoMax) {
+            $produtos->where('preco', 'like', '%' . $this->precoMax . '%');
         }
+       
+        $pag_produtos = $produtos->paginate(6);
+        $categorias = Categoria::distinct()->get();
 
 
-
-        return view('livewire.listar-produto');
+        return view('livewire.listar-produto', [
+            'produtos' => $pag_produtos,
+            'categorias' => $categorias,
+        ]);
     }
 }
