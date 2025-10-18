@@ -131,6 +131,7 @@
 
         <!-- Componente do Carrinho -->
         <livewire:detalhe-carrinho />
+        <livewire:dialog-adicionar-produto />
 
         @fluxScripts
     </body>

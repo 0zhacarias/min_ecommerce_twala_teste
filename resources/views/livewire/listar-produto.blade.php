@@ -1,3 +1,44 @@
+{{-- <header class="border-b border-gray-200 bg-white">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+            <a href="/" class="text-xl font-medium tracking-tight">
+                MINIMAL
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="/shop" class="text-sm hover:text-gray-600 transition-colors">
+                    Shop
+                </a>
+                <a href="/about" class="text-sm hover:text-gray-600 transition-colors">
+                    About
+                </a>
+                <a href="/contact" class="text-sm hover:text-gray-600 transition-colors">
+                    Contact
+                </a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button wire:click="openCart" class="p-2 hover:bg-gray-100 rounded relative">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5.5M7 13l2.5 5.5m0 0L17 21m-7.5-2.5h9"/>
+                    </svg>
+                    @if($totalItems > 0)
+                        <span class="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-black text-white text-xs flex items-center justify-center">
+                            {{ $totalItems }}
+                        </span>
+                    @endif
+                </button>
+                <button class="p-2 hover:bg-gray-100 rounded md:hidden">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header> --}}
+
+
 <div class="max-w-screen mx-auto px-4 py-6">
     <!-- Filtros -->
     <div class="mb-8">
@@ -42,6 +83,16 @@
                 >
             </div>
 
+            <!-- Botão limpar -->
+            <button 
+                wire:click="adicionarProduto"
+                class="px-4 py-2 text-md text-gray-600 hover:text-white hover:bg-gray-900 border border-red-200 rounded-md transition-all duration-200 flex items-center gap-2"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+               Produto
+            </button>
             <!-- Botão limpar -->
             <button 
                 wire:click="limpar"

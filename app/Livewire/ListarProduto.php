@@ -73,6 +73,9 @@ class ListarProduto extends Component
         $carrinho = Session::get('carrinho', []);
         $this->totalItems = array_sum(array_column($carrinho, 'quantidade'));
     }
+    public function adicionarProduto(){
+        $isOpenDialogProduto=true;
+    }
 
     public function abrirCarrinho()
     {
