@@ -129,6 +129,9 @@
 
         {{ $slot }}
 
+        <!-- Componente do Carrinho -->
+        <livewire:detalhe-carrinho />
+
         @fluxScripts
     </body>
 </html>

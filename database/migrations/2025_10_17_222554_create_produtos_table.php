@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->text('descricao')->nullable();
             $table->decimal('preco', 8, 2);
-            $table->integer('estoque')->default(0);
+            $table->integer('quantidade')->default(0);
             $table->string('imagem')->nullable();
             $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
             $table->softDeletes();

@@ -14,7 +14,7 @@ class Produto extends Model
         'nome',
         'descricao',
         'preco',
-        'estoque',
+        'quantidade',
         'imagem',
         'categoria_id',
     ];

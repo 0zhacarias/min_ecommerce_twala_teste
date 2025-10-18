@@ -45,10 +45,26 @@
             <!-- Botão limpar -->
             <button 
                 wire:click="limpar"
-                class="text-sm text-gray-500 hover:text-gray-900 underline"
+                class="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-red-200 rounded-md transition-all duration-200 flex items-center gap-2"
             >
-                Limpar
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+                Limpar Filtros
             </button>
+            <!-- Carrinho -->
+            <div class="relative" wire:click="abrirCarrinho()">
+
+                <button class="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H17M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20.5 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                    </svg>
+                </button>
+                <!-- Badge do carrinho -->
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {{ $totalItems }}
+                </span>
+            </div>
         </div>
     </div>
 
@@ -80,15 +96,18 @@
                     <h3 class="font-medium text-gray-900 text-sm">{{ $produto->nome }}</h3>
                     <p class="text-xs text-gray-500">{{ $produto->categoria }}</p>
                     <p class="font-semibold text-gray-900">
-                        R$ {{ number_format($produto->preco, 2, ',', '.') }}
+                        {{ number_format($produto->preco, 2, ',', '.') }} Kz
                     </p>
                     
-                    @if($produto->estoque > 0)
+                    @if($produto->quantidade > 0)
                         <button 
-                            wire:click="addToCart({{ $produto->id }})"
-                            class="w-full mt-2 py-2 text-sm bg-gray-900 text-white hover:bg-gray-800 transition-colors"
+                            wire:click="adicionarAoCarrinho({{ $produto }})"
+                            class="w-full mt-2 py-2 text-sm bg-gray-900 text-white hover:bg-gray-800 hover:shadow-xl hover:border-white-100 transition-colors flex items-center justify-center gap-2"
                         >
-                            Comprar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H17M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20.5 19.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
+                            </svg>
+                            Adicionar ao carrinho
                         </button>
                     @else
                         <div class="w-full mt-2 py-2 text-sm bg-gray-100 text-gray-400 text-center">
