@@ -35,16 +35,17 @@ cd min_ecommerce_twala_teste
 ```
 composer install
 npm install
-npm run dev
 ```
 #### 3. Configurações 
 ```
+cp .env.example .env
+php artisan key:generate
+
 DB_CONNECTION=mysql
 DB_DATABASE=nome_do_banco
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
-cp .env.example .env
-php artisan key:generate
+
 php artisan migrate --seed
 php artisan storage:link
 ```
@@ -53,11 +54,7 @@ php artisan storage:link
 php artisan serve
 npm run dev
 ```
-#### 4. Inicializando Servidor Local 
-```
-php artisan serve
-npm run dev
-```
+
 ### 2. Docker 
 #### 1. Subir o Docker 
 ```
