@@ -29,11 +29,11 @@ class DetalheCarrinho extends Component
         $this->isCartOpen = false;
     }
 
-    public function mount()
+ /*    public function mount()
     {
         $this->updateDadoCarrinho();
     }
-
+ */
     #[On('contar-carrinho')]
     public function updateDadoCarrinho()
     {

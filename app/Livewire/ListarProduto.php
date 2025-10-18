@@ -63,11 +63,11 @@ class ListarProduto extends Component
        // $this->emit('produtoAdicionadoAoCarrinho', $produtoId);
     }
 
-    public function mount()
+/*     public function mount()
     {
         $this->updateContagem();
     }
-
+ */
     public function updateContagem()
     {
         $carrinho = Session::get('carrinho', []);

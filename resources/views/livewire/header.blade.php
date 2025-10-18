@@ -5,7 +5,7 @@
         <!-- Logo/Brand -->
         <div class="flex items-center">
             <a href="/" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-              Mine Ecomerce Twala
+              Mini Ecomerce Twala
             </a>
         </div>
 
