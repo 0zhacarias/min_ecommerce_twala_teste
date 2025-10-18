@@ -19,7 +19,7 @@ class ListarProduto extends Component
     public $precoMax = "";
     public $totalItems = 0;
 
-    protected $listeners = ['contar-carrinho' => 'updateContagem'];
+    protected $listeners = ['contar-carrinho' => 'updateContagem',  'produto_adicionado' => 'adicionarProduto' ];
 
     public function atualizar($propriadade)
     {
@@ -73,7 +73,10 @@ class ListarProduto extends Component
         $carrinho = Session::get('carrinho', []);
         $this->totalItems = array_sum(array_column($carrinho, 'quantidade'));
     }
-    public function adicionarProduto(){
+    public function abrirDialogProduto(){
+        $this->dispatch('abrir-dialog-produto');
+       // $this->produtos[]=$produto;
+
         $isOpenDialogProduto=true;
     }
 

@@ -85,7 +85,7 @@
 
             <!-- Botão limpar -->
             <button 
-                wire:click="adicionarProduto"
+                wire:click="abrirDialogProduto"
                 class="px-4 py-2 text-md text-gray-600 hover:text-white hover:bg-gray-900 border border-red-200 rounded-md transition-all duration-200 flex items-center gap-2"
             >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

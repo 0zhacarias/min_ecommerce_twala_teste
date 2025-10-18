@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Categoria;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -14,6 +16,8 @@ class DialogAdicionarProduto extends Component
     public $descricao = '';
     public $quantidade = 0;
     public $categoria_id = '';
+    public $preco = 0.0;
+    public $categorias = [];
 
     protected function rules()
     {
@@ -35,7 +39,7 @@ class DialogAdicionarProduto extends Component
             'quantidade.integer' => 'A quantidade do produto deve ser um número inteiro.',
             'quantidade.min' => 'A quantidade do produto deve ser pelo menos 1.',
             'categoria_id.required' => 'A categoria do produto é obrigatória.',
-            'imagem.required' => 'A imagem do produto é obrigatória.',
+            'imagem.required' => 'A imagem do produto é 100% obrigatória.',
             'imagem.image' => 'O arquivo deve ser uma imagem.',
             'imagem.max' => 'A imagem não pode ser maior que 2MB.',
             'preco.required' => 'O preço do produto é obrigatório.',
@@ -44,9 +48,11 @@ class DialogAdicionarProduto extends Component
 
         ];
     }
+    #[On('abrir-dialog-produto')]
     public function abrirDialogProduto()
     {
         $this->isOpenDialogProduto = true;
+        $this->categorias = Categoria::get();
     }
     public function fecharDialogProduto()
     {
@@ -54,8 +60,9 @@ class DialogAdicionarProduto extends Component
     }
     public function adicionarProduto()
     {
+        $this->validate();
         try {
-            $this->validate();
+
             $produto = [
                 'nome' => $this->nome,
                 'descricao' => $this->descricao,
@@ -64,6 +71,7 @@ class DialogAdicionarProduto extends Component
                 'imagem' => $this->imagem->store('produtos', 'public'),
                 'preco' => $this->preco,
             ];
+           // dd($produto);
             // Lógica para adicionar o produto
             $this->dispatch('produto_adicionado', produto: $produto);
             $this->fecharDialogProduto();
@@ -73,8 +81,10 @@ class DialogAdicionarProduto extends Component
         }
     }
 
-    public function render()
+ /*    public function render()
     {
-        return view('livewire.dialog-adicionar-produto');
-    }
+        return view('livewire.dialog-adicionar-produto',[
+
+        ]);
+    } */
 }
