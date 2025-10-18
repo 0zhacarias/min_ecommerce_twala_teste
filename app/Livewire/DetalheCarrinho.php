@@ -14,7 +14,6 @@ class DetalheCarrinho extends Component
     public $isCheckingOut = false;
     public $items = [];
     public $totalPreco = 0;
-  
     #[On('abrir-carrinho')]
     public function abrirCarrinho()
     {
@@ -35,13 +34,13 @@ class DetalheCarrinho extends Component
     public function updateDadoCarrinho()
     {
         $carrinho = Session::get('carrinho', []);
-        
+
         // Recalcular subtotais para todos os itens
         foreach ($carrinho as $id => $item) {
             $preco = (float)  $item['preco'];
             $carrinho[$id]['subtotal'] = 'Kz ' . number_format($preco * $item['quantidade'], 2, ',', '.');
         }
-        
+
         $this->items = $carrinho;
         $this->calculateTotal();
     }
@@ -82,12 +81,17 @@ class DetalheCarrinho extends Component
 
     public function checkout()
     {
-        /*  abort_unless(auth()->user(), 403, 'Você precisa estar logado para finalizar a compra.');
-        dd('Implementar lógica de checkout aqui'); */
-        $this->isCheckingOut = true;
 
+        // session()->flash('error', 'Você precisa estar logado para finalizar a compra.');
+        //  abort_unless(auth()->user(), 403, 'Você precisa estar logado para finalizar a compra.');
+        //dd('Implementar lógica de checkout aqui');
+        if (!auth()->user()) {
+            session()->flash('error', 'Você precisa estar logado para finalizar a compra.');
+            $this->isCheckingOut = true;
+            return;
+        }
         // Simulate checkout process
-        sleep(1);
+        sleep(5);
 
         session()->flash('success', 'Compra finalizada com sucesso! Obrigado pela sua compra.');
         $this->limparCarrinho();

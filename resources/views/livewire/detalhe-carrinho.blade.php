@@ -103,4 +103,9 @@
             </div>
         @endif
     </div>
+    @if (session()->has('error'))
+        <div class="fixed top-4 right-4 bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded z-50">
+            {{ session('error') }}
+        </div>
+    @endif
 </div>
