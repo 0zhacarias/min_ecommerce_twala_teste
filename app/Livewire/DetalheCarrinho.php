@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -14,12 +15,15 @@ class DetalheCarrinho extends Component
     public $isCheckingOut = false;
     public $items = [];
     public $totalPreco = 0;
+    //protected $listeners = ['dialog-encomenda' => 'updateContagem' ];
+
     #[On('abrir-carrinho')]
     public function abrirCarrinho()
     {
         $this->isCartOpen = true;
     }
 
+    #[On('fechar-carrinho')]
     public function fecharCarrinho()
     {
         $this->isCartOpen = false;
@@ -79,24 +83,24 @@ class DetalheCarrinho extends Component
         $this->dispatch('contar-carrinho');
     }
 
-    public function checkout()
-    {
 
-        // session()->flash('error', 'Você precisa estar logado para finalizar a compra.');
-        //  abort_unless(auth()->user(), 403, 'Você precisa estar logado para finalizar a compra.');
-        //dd('Implementar lógica de checkout aqui');
-        if (!auth()->user()) {
+public function checkout()
+    {
+        // Verificar se o usuário está logado
+        if (!Auth::check()) {
             session()->flash('error', 'Você precisa estar logado para finalizar a compra.');
-            $this->isCheckingOut = true;
+            $this->isCheckingOut = false;
             return;
         }
-        // Simulate checkout process
-        sleep(5);
 
-        session()->flash('success', 'Compra finalizada com sucesso! Obrigado pela sua compra.');
-        $this->limparCarrinho();
-        $this->fecharCarrinho();
-        $this->isCheckingOut = false;
+        // Verificar se há itens no carrinho
+        if (empty($this->items)) {
+            session()->flash('error', 'Seu carrinho está vazio.');
+            return;
+        }
+
+        // Abrir o dialog de encomenda
+        $this->dispatch('abrir-dialog-encomenda');
     }
 
     private function calculateTotal()

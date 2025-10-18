@@ -137,6 +137,10 @@
         {{ $slot }}
 
         <!-- Componente do Carrinho -->
+        <livewire:detalhe-carrinho />
+        
+        <!-- Componente do Dialog Encomenda -->
+        <livewire:dialog-encomenda />
 
         @fluxScripts
       
