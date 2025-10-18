@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('encomendas', function (Blueprint $table) {
             $table->id();
-            $table->string('status')->default('pendente');
+            $table->string('estado')->default('pendente');
             $table->decimal('total_preco', 10, 2);
             $table->string('endereco_entrega');
             $table->string('metodo_pagamento');
             $table->text('observacoes')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->dateTime('data_encomenda');
-  $table->softDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -14,13 +14,14 @@ class Encomenda extends Model
     use HasFactory,SoftDeletes;
     protected $fillable = [
         'user_id',
-        'status',
+        'estado',
         'total_preco',
         'endereco_entrega',
         'metodo_pagamento',
         'observacoes',
         'data_encomenda',
         'created_by',
+        
 
     ];
     public function itens():HasMany

@@ -23,10 +23,10 @@ class ProdutoFactory extends Factory
             'preco' => $this->faker->randomFloat(2, 1, 1000),
             'quantidade' => $this->faker->numberBetween(0, 100),
             'imagem' => $this->faker->randomElement([
-               'imagens/produto'.$this->faker->numberBetween(1,30).'.jpg',
+               'imagens/produtos/produto'.$this->faker->numberBetween(1,5).'.jpg',
                 null,
             ]),
-            'categoria_id' => Categoria::factory(),
+            'categoria_id' => Categoria::factory()->count(5),
         ];
     }
 }

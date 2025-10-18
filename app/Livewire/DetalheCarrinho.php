@@ -101,6 +101,8 @@ public function checkout()
 
         // Abrir o dialog de encomenda
         $this->dispatch('abrir-dialog-encomenda');
+
+        
     }
 
     private function calculateTotal()

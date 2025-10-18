@@ -25,12 +25,5 @@ class Produto extends Model
         return $this->belongsTo(Categoria::class, 'categoria_id');
         
     }
-    protected function imageUrl(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->imagem 
-                ? asset('storage/' . $this->imagem)
-                : asset('images/produto.png'),
-        );
-    }
+
 }
