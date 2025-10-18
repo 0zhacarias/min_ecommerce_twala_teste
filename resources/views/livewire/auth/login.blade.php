@@ -200,6 +200,17 @@ new #[Layout('components.layouts.auth')] class extends Component {
                     </p>
                 </div>
             @endif
+               <div class="text-center pt-4 border-t border-gray-200">
+                    <p class="text-gray-600">
+                        <flux:link 
+                            :href="route('produtos.index')" 
+                            wire:navigate
+                            class="font-semibold text-gray-600 hover:text-gray-800 transition-colors duration-200 ml-1"
+                        >
+                            {{ __('Voltar') }}
+                        </flux:link>
+                    </p>
+                </div>
         </div>
     </div>
 </div>

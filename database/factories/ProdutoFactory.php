@@ -18,15 +18,15 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => 'Item '.$this->faker->randomNumber(1,20),
+            'nome' => 'Item '.$this->faker->unique()->numberBetween(1, 20),
             'descricao' => $this->faker->sentence(),
             'preco' => $this->faker->randomFloat(2, 1, 1000),
             'quantidade' => $this->faker->numberBetween(0, 100),
             'imagem' => $this->faker->randomElement([
                'imagens/produtos/produto'.$this->faker->numberBetween(1,5).'.jpg',
-                null,
+              //  null,
             ]),
-            'categoria_id' => Categoria::factory()->count(5),
+            'categoria_id' => Categoria::factory(),
         ];
     }
 }
