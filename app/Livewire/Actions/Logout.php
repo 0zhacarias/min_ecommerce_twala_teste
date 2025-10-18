@@ -12,11 +12,12 @@ class Logout
      */
     public function __invoke()
     {
+        $carrinho = session('carrinho', []);
         Auth::guard('web')->logout();
 
         Session::invalidate();
         Session::regenerateToken();
-
+        session(['carrinho' => $carrinho]);
         return redirect('/');
     }
 }
