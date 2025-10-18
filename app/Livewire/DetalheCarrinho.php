@@ -38,11 +38,10 @@ class DetalheCarrinho extends Component
     public function updateDadoCarrinho()
     {
         $carrinho = Session::get('carrinho', []);
-
-        // Recalcular subtotais para todos os itens
         foreach ($carrinho as $id => $item) {
             $preco = (float)  $item['preco'];
-            $carrinho[$id]['subtotal'] = 'Kz ' . number_format($preco * $item['quantidade'], 2, ',', '.');
+            //$carrinho[$id]['subtotal'] = 'Kz ' . number_format($preco * $item['quantidade'], 2, ',', '.');
+            $carrinho[$id]['subtotal'] = ($preco * $item['quantidade']);
         }
 
         $this->items = $carrinho;
@@ -57,9 +56,8 @@ class DetalheCarrinho extends Component
             unset($carrinho[$productId]);
         } else {
             $carrinho[$productId]['quantidade'] = $quantidade;
-            // Calcular subtotal para este item específico
-            $preco = (float) str_replace(['Kz ', '.', ','], ['', '', '.'], $carrinho[$productId]['preco']);
-            $carrinho[$productId]['subtotal'] = 'Kz ' . number_format($preco * $quantidade, 2, ',', '.');
+            $preco = (float)  $carrinho[$productId]['preco'];
+            $carrinho[$productId]['subtotal'] =  ($preco * $quantidade);
         }
 
         Session::put('carrinho', $carrinho);
@@ -86,20 +84,17 @@ class DetalheCarrinho extends Component
 
 public function checkout()
     {
-        // Verificar se o usuário está logado
         if (!Auth::check()) {
             session()->flash('error', 'Você precisa estar logado para finalizar a compra.');
             $this->isCheckingOut = false;
             return;
         }
 
-        // Verificar se há itens no carrinho
         if (empty($this->items)) {
             session()->flash('error', 'Seu carrinho está vazio.');
             return;
         }
 
-        // Abrir o dialog de encomenda
         $this->dispatch('abrir-dialog-encomenda');
 
         
@@ -109,7 +104,7 @@ public function checkout()
     {
         $this->totalPreco = 0;
         foreach ($this->items as $item) {
-            $preco = (float) str_replace(['Kz ', '.', ','], ['', '', '.'], $item['preco']);
+            $preco = (float)  $item['preco'];
             $this->totalPreco += $preco * $item['quantidade'];
         }
     }

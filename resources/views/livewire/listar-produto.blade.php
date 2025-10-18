@@ -71,7 +71,10 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         @foreach ($produtos as $produto)
             <div class="group">
-                <div class="aspect-square bg-gray-50 mb-3 overflow-hidden">
+                <div class="aspect-square bg-gray-50 mb-3 overflow-hidden" 
+                        wire:click="$dispatch('abrirDialogDetalheProduto', { id_produto: {{ $produto->id }} })"
+                >
+                    
                     @if ($produto->imagem)
                         <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200">
@@ -88,8 +91,8 @@
                 </div>
                 <div class="space-y-1">
                     <h3 class="font-medium text-gray-900 text-sm">{{ $produto->nome }}</h3>
-                    <p class="text-xs text-gray-500">{{ $produto->categoria }}</p>
-                    <p class="font-semibold text-gray-900">
+{{--                     <p class="text-xs text-gray-500">{{ $produto->categoria->nome }}</p>
+ --}}                    <p class="font-semibold text-gray-900">
                         {{ number_format($produto->preco, 2, ',', '.') }} Kz
                     </p>
 
@@ -117,5 +120,5 @@
         {{ $produtos->links() }}
     </div>
     {{--             <livewire:detalhe-carrinho />
- --}} <livewire:dialog-adicionar-produto />
+ --}} 
 </div>

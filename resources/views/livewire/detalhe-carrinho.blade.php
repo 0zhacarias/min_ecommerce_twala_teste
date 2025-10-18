@@ -40,11 +40,11 @@
                                    
                                     <div>
                                         <h3 class="font-medium">{{ $item['nome'] }}</h3>
-                                        <p class="text-sm text-gray-600">{{ $item['preco'] }}</p>
+                                        <p class="text-sm text-gray-600">{{ number_format($item['preco'], 2, ',', '.') }} Kz</p>
                                     </div>
                                      <div>
                                         <h3 class="font-medium">Subtotal</h3>
-                                        <p class="text-sm text-gray-600">{{ $item['subtotal'] }}</p>
+                                        <p class="text-sm text-gray-600">{{ number_format($item['subtotal'], 2, ',', '.') }} Kz</p>
                                     </div>
                                 </div>
 

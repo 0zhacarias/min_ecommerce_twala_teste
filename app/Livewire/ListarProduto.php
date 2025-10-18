@@ -55,7 +55,7 @@ class ListarProduto extends Component
 
         // Calcular subtotal para o item
         $preco = (float)  $carrinho[$produtoId]['preco'];
-        $carrinho[$produtoId]['subtotal'] = 'Kz ' . number_format($preco * $carrinho[$produtoId]['quantidade'], 2, ',', '.');
+        $carrinho[$produtoId]['subtotal'] = ($preco * $carrinho[$produtoId]['quantidade']);
 
         Session::put('carrinho', $carrinho);
         $this->dispatch('contar-carrinho');
@@ -99,7 +99,7 @@ class ListarProduto extends Component
         }); */
         // Lógica para adicionar o produto
       //  $this->adicionarAoCarrinho($produto);
-      return Produto::with('categorias')->latest()->paginate(8);
+      return Produto::with('categoria')->latest()->paginate(8);
     }
     public function render()
     {

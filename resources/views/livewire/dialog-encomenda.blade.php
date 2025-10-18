@@ -67,14 +67,14 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex gap-3 pt-6">
+                    <div class="flex gap-1 pt-3">
                         <button type="button" wire:click="fecharDialogEncomenda"
-                            class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
+                            class="flex-1 p-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
                             Cancelar
                         </button>
                         <button type="button" wire:click="confirmarEncomenda" wire:loading.attr="disabled"
-                            class="flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50">
-                            <span wire:loading.remove wire:target="confirmarEncomenda">Confirmar Encomenda</span>
+                            class="flex-1 p-1 bg-gray-900 text-white rounded-md hover:bg-gray-700 transition-colors disabled:opacity-50">
+                            <span wire:loading.remove wire:target="confirmarEncomenda">Confirmar</span>
                             <span wire:loading wire:target="confirmarEncomenda">Processando...</span>
                         </button>
                     </div>
