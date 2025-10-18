@@ -14,6 +14,7 @@ class DetalheCarrinho extends Component
     public $isCheckingOut = false;
     public $items = [];
     public $totalPreco = 0;
+  
     #[On('abrir-carrinho')]
     public function abrirCarrinho()
     {
@@ -81,6 +82,8 @@ class DetalheCarrinho extends Component
 
     public function checkout()
     {
+        /*  abort_unless(auth()->user(), 403, 'Você precisa estar logado para finalizar a compra.');
+        dd('Implementar lógica de checkout aqui'); */
         $this->isCheckingOut = true;
 
         // Simulate checkout process

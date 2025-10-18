@@ -6,10 +6,13 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
+Route::get('/', ListarProduto::class)->name('produtos.index');
+Route::get('/login', function () {
+    return view('welcome');
+    
+   //return view('welcome');
+})->name('home'); 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -33,8 +36,8 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 });
-Route::middleware(['auth'])->group(function () {
+/* Route::middleware(['auth'])->group(function () {
 Route::get('/produtos', ListarProduto::class)->name('produtos.index');
 });
-
+ */
 require __DIR__.'/auth.php';
