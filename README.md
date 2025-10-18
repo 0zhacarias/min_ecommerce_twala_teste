@@ -24,7 +24,7 @@
 
 ## 🚀 Instalação e Configuração
 
-### Método 1: Desenvolvimento Local (Recomendado para Desenvolvimento)
+###  1: Desenvolvimento Local (Recomendado para Desenvolvimento)
 
 #### 1. Clonar o Repositório
 ```bash
@@ -52,4 +52,27 @@ php artisan storage:link
 ```
 php artisan serve
 npm run dev
+```
+#### 4. Inicializando Servidor Local 
+```
+php artisan serve
+npm run dev
+```
+### 2. Docker 
+#### 1. Subir o Docker 
+```
+docker-compose up -d
+`````
+#### 2. Configurando Docker 
+
+```
+composer install
+npm install && npm run build || npm run dev
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+```
+#### 3. Parar o Docker 
+```
+docker-compose down
 ```
