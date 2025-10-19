@@ -31,7 +31,7 @@
                     @foreach ($items as $id => $item)
                         <div class="flex gap-4">
                             <div class="relative w-24 h-24 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
-                                <img src="{{ $item['imagem'] ?: '/placeholder.svg' }}" alt="{{ $item['nome'] }}"
+                                <img src="{{ 'storage/'.$item['imagem'] ?: '/placeholder.svg' }}" alt="{{ $item['nome'] }}"
                                     class="object-cover w-full h-full" />
                             </div>
 

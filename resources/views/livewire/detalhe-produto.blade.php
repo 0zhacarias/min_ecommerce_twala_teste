@@ -34,7 +34,7 @@
                             <div class="space-y-4">
                                 <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                                     <img 
-                                        src="{{ $produto->imagem }}" 
+                                        src="{{ 'storage/'.$produto->imagem }}" 
                                         alt="{{ $produto->nome }}"
                                         class="w-full h-full object-cover"
                                     />

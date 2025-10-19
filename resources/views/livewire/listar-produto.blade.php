@@ -75,7 +75,7 @@
                 >
                     
                     @if ($produto->imagem)
-                        <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}"
+                        <img src="{{('storage/'.$produto->imagem) }}" alt="{{ $produto->nome }}"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200">
                     @else
                         <div class="w-full h-full flex items-center justify-center">
